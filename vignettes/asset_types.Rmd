@@ -1,0 +1,98 @@
+---
+title: "Asset Types"
+author: "Kristin Yeager"
+date: "August 24, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Before You Use
+
+The LibGuides V1.1 API requires a LibGuides CMS subscription, so if your institution does not have a CMS subscription, you will not be able to use this package.
+
+Your site ID and API key can be found in your LibGuides system under Tools > API. Go to the Endpoints V1.1 tab, then click the GET Guides link.
+
+
+## Basic Use
+
+### Guides
+
+Retrieve all guides in your system (replace `your_siteid` and `your_key` with your institution's site ID and API key):
+
+```
+myguides <- get_guides_data(siteID=your_siteid, 
+                            key=your_key,
+                            expand_pages=FALSE)
+```
+
+Retrieve all guide _pages_ in your system:
+
+```
+myguidepages <- get_guides_data(siteID=your_siteid, 
+                                key=your_key,
+                                expand_pages=TRUE)
+```
+
+
+
+### Assets
+
+The `GET assets` API by default retrieves all asset types; however, this results in a massive download. If you are interested in downloading book assets, database assets, or file assets, then the functions `get_book_assets()`, `get_database_assets()`, and `get_file_assets()` are convenience functions for retrieving those asset types, respectively. 
+
+```
+mybooks <- get_book_assets(siteID=your_siteid, 
+                            key=your_key)
+```
+
+If desired, the `options` argument can be used to specify other querystring parameters as described on the API page in your LibGuides system. For example, if I wanted to retrieve all document/file assets that appear on the SAS Tutorials (guide ID: 278271) and SPSS Tutorials (guide ID: 278275) LibGuides, I could run:
+
+```
+myfiles <- get_file_assets(siteID=your_siteid, 
+                           key=your_key,
+                           options="&guide_ids[]=278271&guide_ids[]=278275")
+```
+
+Note that the string you supply to the `options` argument will almost always start with an ampersand (&).
+
+
+### Advanced Usage
+
+To retrieve other asset types, you will want to use the `call_LG_api()` function. The `GET assets` API querystring parameter `asset_types` can be used to filter the asset types to one or more specific types, using the following codes:
+
+```
+1 - Rich Text/HTML
+2 - Link
+3 - RSS Feed
+4 - Document / File
+5 - Book from the Catalog
+6 - Poll
+7 - Google Search
+9 - Media / Widget
+10 - Database
+11 - Guide List
+12 - LibAnswers Widget
+13 - LibWizard Item
+```
+
+For example, to get a list of link assets:
+
+```{r}
+#' Make API call - returns JSON output
+mylinks <- call_LG_api(siteID=your_siteid,
+                       key=your_key,
+                       content="assets",
+                       options="&asset_types=2")
+
+#' Convert JSON output to dataframe
+mylinks <- jsonlite::fromJSON(mylinks)
+mylinks <- jsonlite::flatten(mylinks)
+```
+
+
+
+
+
+

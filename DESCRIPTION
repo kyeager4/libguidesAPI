@@ -1,0 +1,19 @@
+Package: libguidesAPI
+Type: Package
+Title: Unofficial LibGuides API Wrapper
+Version: 0.1.0
+Date: 2017-04-20
+Authors@R: person("Kristin", "Yeager", email = "kyeager4@kent.edu",
+  role = c("aut", "cre"))
+Description: Convenience functions for getting data from the LibGuides Endpoints v1.1 API.
+LazyData: true
+Depends:
+    dplyr,
+    tidyr,
+    jsonlite
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
+RoxygenNote: 7.1.1
