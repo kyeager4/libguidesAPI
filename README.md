@@ -15,7 +15,7 @@ install.packages(c("devtools", "jsonlite"))
 You will then need to install this package from github:
 ```{r}
 library(devtools)
-devtools::install_github("kyeager4/ksulibSearch")
+devtools::install_github("kyeager4/libguidesAPI")
 ```
 
 Once the packages are installed, you do not have to re-install them the next time you launch R.
