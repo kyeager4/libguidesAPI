@@ -20,7 +20,7 @@ devtools::install_github("kyeager4/libguidesAPI")
 
 Once the packages are installed, you do not have to re-install them the next time you launch R.
 
-If there are changes to the code in this package, you can rerun `install_github("kyeager4/ksulibSearch")` to update to the most recent version.
+If there are changes to the code in this package, you can rerun `install_github("kyeager4/libguidesAPI")` to update to the most recent version.
 
 ## Using this package
 
